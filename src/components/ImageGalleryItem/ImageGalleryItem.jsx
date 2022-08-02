@@ -55,9 +55,15 @@ class ImageGalleryItem extends React.Component {
   //   }
 
   render() {
+    // this.props.items && console.log(this.props.items[0].id)
+    const { items } = this.props;
     return (
       <>
-        <Image src={this.props.item.webformatURL} alt="" />
+        {items && items.map(item => <Item key={item.id}>
+            <Image src={item.webformatURL} alt="" />
+        </Item>)}
+        
+        
       </>
     );
   }

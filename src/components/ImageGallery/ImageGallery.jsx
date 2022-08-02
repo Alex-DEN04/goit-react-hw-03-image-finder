@@ -13,8 +13,8 @@ class ImageGallery extends React.Component {
   searchImage = ({ imageSearch }) => {
     // console.log(imageSearch);
     this.setState({ imageName: imageSearch });
-    //   console.log(this.state);
-    //   console.log(this.props);
+      // console.log(this.state);
+      // console.log(this.props);
   };
 
   async componentDidUpdate(prevProps, prevState) {
@@ -23,6 +23,8 @@ class ImageGallery extends React.Component {
     // console.log(prevProps);
     const prevImageName = prevProps.imageSearch;
     const nextImageName = this.props.imageSearch;
+    // console.log(prevImageName);
+    // console.log(nextImageName);
     if (prevImageName !== nextImageName) {
       try {
         const response = await axios.get('https://pixabay.com/api/', {
@@ -38,7 +40,7 @@ class ImageGallery extends React.Component {
           },
         });
         const data = response.data.hits;
-        // console.log(response.data.hits);
+        // console.log(response);
         this.setState({images: data});
         // console.log(this.state);
         // const photos = response.data;
@@ -55,23 +57,12 @@ class ImageGallery extends React.Component {
 
   render() {
     // console.log(this.state.images);
-    const { images } = this.state;
+    // const { images } = this.state;
     // console.log(images);
     // images.map(image => console.log(image))
     return (
       <Gallery>
-        {/* {items.map(item => (
-        <li key={item.id}>
-          <ImageGalleryItem item={item} {...otherProps} />
-          <hr />
-        </li>
-      ))} */}
-        {/* {images.map(item => (
-          <li key={item.id}>
-            <ImageGalleryItem item={item} />
-            <hr />
-          </li>
-        ))} */}
+        <ImageGalleryItem items={this.state.images} />
       </Gallery>
     );
   }

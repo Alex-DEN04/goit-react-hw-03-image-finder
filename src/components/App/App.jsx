@@ -19,7 +19,7 @@ export class App extends React.Component {
     return (
       <AppStyled>
         <Searchbar onSubmit={this.handleSubmit} />
-        <ImageGallery imageSearch={this.state.imageName} />
+        <ImageGallery imageSearch={this.state.imageName}/>
       </AppStyled>
     );
   }
