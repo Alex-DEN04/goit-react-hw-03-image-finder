@@ -1,11 +1,11 @@
 import React from 'react';
 import { Formik } from 'formik';
+import {BsSearch} from 'react-icons/bs';
 
 import {
   SearchForm,
   Header,
   Button,
-  ButtonLabel,
   Input,
 } from './Searchbar.styled';
 
@@ -24,7 +24,9 @@ const Searchbar = ({ onSubmit }) => {
       <Header>
         <SearchForm>
           <Button type="submit">
-            <ButtonLabel>Search</ButtonLabel>
+            {/* <ButtonLabel> */}
+              <BsSearch/>
+            {/* </ButtonLabel> */}
           </Button>
 
           <Input
