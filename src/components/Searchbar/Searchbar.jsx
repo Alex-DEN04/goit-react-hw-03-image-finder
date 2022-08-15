@@ -1,20 +1,22 @@
 import React from 'react';
 import { Formik } from 'formik';
-import {BsSearch} from 'react-icons/bs';
+import { BsSearch } from 'react-icons/bs';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-import {
-  SearchForm,
-  Header,
-  Button,
-  Input,
-} from './Searchbar.styled';
+import { SearchForm, Header, Button, Input } from './Searchbar.styled';
 
 const Searchbar = ({ onSubmit }) => {
   const initialValues = { input: '' };
 
   const onHandlerFormSubmit = async (values, actions) => {
+    // const value = values;
+    if (values.input.trim() === '') {
+      toast.error('Enter the name of the image, please!');
+      return;
+    }
     await onSubmit(values);
-    // console.log(values);
+    // console.log(values.input);
     // console.log(actions);
     actions.resetForm();
   };
@@ -25,7 +27,7 @@ const Searchbar = ({ onSubmit }) => {
         <SearchForm>
           <Button type="submit">
             {/* <ButtonLabel> */}
-              <BsSearch/>
+            <BsSearch />
             {/* </ButtonLabel> */}
           </Button>
 
