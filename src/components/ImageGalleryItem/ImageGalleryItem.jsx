@@ -4,11 +4,16 @@ import React from 'react';
 import { Item, Image } from './ImageGalleryItem.styled';
 
 class ImageGalleryItem extends React.Component {
-  //   state = {
-  //     image: null,
-  //     // imageName: null,
-  //   };
+  // state = {
+  // images: null,
+  // imageName: null,
+  // };
 
+  // poful = () => {
+  // this.setState(prevState => ())
+  // console.log(this.state.images);
+  // }
+  // poful ()
   //   searchImage = ({imageSearch}) => {
   //     // console.log(imageSearch);
   //     this.setState({ imageName: imageSearch });
@@ -57,14 +62,16 @@ class ImageGalleryItem extends React.Component {
   render() {
     // this.props.items && console.log(this.props.items[0].id)
     const { items } = this.props;
+    // console.log(this.state.image);
+    // console.log(items);
+    // console.log(items);
     return (
       <>
-        {items &&
-          items.map(item => (
-            <Item key={item.id}>
-              <Image src={item.webformatURL} alt="" />
-            </Item>
-          ))}
+        {items.map(item => (
+          <Item key={item.id}>
+            <Image src={item.webformatURL} alt="" />
+          </Item>
+        ))}
       </>
     );
   }

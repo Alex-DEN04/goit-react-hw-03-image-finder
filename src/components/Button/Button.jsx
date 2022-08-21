@@ -4,7 +4,7 @@ import { LoadButton } from './Buttton.styled';
 export const Button = ({ onClick }) => {
   // console.log(props);
   return (
-    <LoadButton onClick={onClick} ktype="button">
+    <LoadButton onClick={onClick} type="button">
       Load more
     </LoadButton>
   );
