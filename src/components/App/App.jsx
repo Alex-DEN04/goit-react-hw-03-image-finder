@@ -1,12 +1,14 @@
 import React from 'react';
 import { ToastContainer } from 'react-toastify';
-import { RotatingLines } from  'react-loader-spinner'
+import { RotatingLines } from 'react-loader-spinner';
 
 import Searchbar from '../Searchbar/Searchbar';
 import ImageGallery from '../ImageGallery/ImageGallery';
 import { getImages } from '../services/api';
 import { Button } from '../Button/Button';
 import { AppStyled, Spiner } from './App.styled';
+import { Modal } from '../Modal/Modal';
+import { GlobalStyle } from 'components/Global/GlobalStyled';
 
 export class App extends React.Component {
   state = {
@@ -14,14 +16,7 @@ export class App extends React.Component {
     page: 1,
     images: [],
     loading: false,
-  };
-
-  handleSubmit = ({ input }) => {
-    this.setState({ imageName: input, page: 1, images: []});
-  };
-
-  loadMore = () => {
-    this.setState(prevState => ({ page: prevState.page + 1 }));
+    showModal: false,
   };
 
   componentDidUpdate = async (prevProps, prevState) => {
@@ -29,10 +24,13 @@ export class App extends React.Component {
     const nextImageName = this.state.imageName.trim();
     if (prevImageName !== nextImageName || prevState.page !== this.state.page) {
       try {
-        const { page } = this.state
-        this.setState({loading: true})
+        const { page } = this.state;
+        this.setState({ loading: true });
         const data = await getImages(nextImageName, page);
-        this.setState({ images: [...this.state.images, ...data], loading: false});
+        this.setState({
+          images: [...this.state.images, ...data],
+          loading: false,
+        });
         // console.log(this.props);
         // Notiflix.Notify.failure(
         //   'Sorry, there are no images matching your search query. Please try again.',
@@ -42,18 +40,38 @@ export class App extends React.Component {
         console.log(error);
       }
     }
-  }
+  };
+
+  handleSubmit = ({ input }) => {
+    this.setState({ imageName: input, page: 1, images: [] });
+  };
+
+  loadMore = () => {
+    this.setState(prevState => ({ page: prevState.page + 1 }));
+  };
+
+  toggleModal = () => {
+    this.setState(prevState => ({ showModal: !prevState.showModal }));
+  };
 
   render() {
-    const { images, loading } = this.state;
+    const { images, loading, showModal } = this.state;
     return (
-      <AppStyled>
-        <Searchbar onSubmit={this.handleSubmit} />
-        <ImageGallery images={images} />
-          {loading && <Spiner><RotatingLines/></Spiner>}
+      <>
+        <GlobalStyle />
+        <AppStyled>
+          <Searchbar onSubmit={this.handleSubmit} />
+          <ImageGallery images={images} />
+          {loading && (
+            <Spiner>
+              <RotatingLines />
+            </Spiner>
+          )}
           {images.length !== 0 && <Button onClick={this.loadMore} />}
+          {showModal && <Modal images={images} />}
           <ToastContainer autoClose={3000} />
-      </AppStyled>
+        </AppStyled>
+      </>
     );
   }
 }

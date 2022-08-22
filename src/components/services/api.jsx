@@ -1,12 +1,12 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://pixabay.com/api/';
-export const getImages = async (nextImageName, page) => {
+export const getImages = async (imageName, page) => {
   const response = axios.get(BASE_URL, {
     params: {
       responseType: 'stream',
       key: '27604632-8d8d559eecaed720301290fe4',
-      q: nextImageName,
+      q: imageName,
       image_type: 'photo',
       orientation: 'horizontal',
       safesearch: true,
@@ -14,5 +14,5 @@ export const getImages = async (nextImageName, page) => {
       page,
     },
   });
-    return (await response).data.hits;
+  return (await response).data.hits;
 };
