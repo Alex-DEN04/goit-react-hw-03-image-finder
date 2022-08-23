@@ -54,6 +54,10 @@ export class App extends React.Component {
     this.setState(prevState => ({ showModal: !prevState.showModal }));
   };
 
+  onImageClick = () => {
+    console.log("object");
+  }
+
   render() {
     const { images, loading, showModal } = this.state;
     return (
@@ -61,14 +65,14 @@ export class App extends React.Component {
         <GlobalStyle />
         <AppStyled>
           <Searchbar onSubmit={this.handleSubmit} />
-          <ImageGallery images={images} />
+          <ImageGallery images={images} onClick={() => this.onImageClick} />
           {loading && (
             <Spiner>
               <RotatingLines />
             </Spiner>
           )}
           {images.length !== 0 && <Button onClick={this.loadMore} />}
-          {showModal && <Modal images={images} />}
+          {showModal && <Modal images={images}>{this.props.children}</Modal>}
           <ToastContainer autoClose={3000} />
         </AppStyled>
       </>

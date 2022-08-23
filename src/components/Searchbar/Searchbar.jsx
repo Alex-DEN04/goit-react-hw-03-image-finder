@@ -10,14 +10,11 @@ const Searchbar = ({ onSubmit }) => {
   const initialValues = { input: '' };
 
   const onHandlerFormSubmit = async (values, actions) => {
-    // const value = values;
     if (values.input.trim() === '') {
       toast.error('Enter the name of the image, please!');
       return;
     }
     await onSubmit(values);
-    // console.log(values.input);
-    // console.log(actions);
     actions.resetForm();
   };
 
@@ -26,9 +23,7 @@ const Searchbar = ({ onSubmit }) => {
       <Header>
         <SearchForm>
           <Button type="submit">
-            {/* <ButtonLabel> */}
             <BsSearch />
-            {/* </ButtonLabel> */}
           </Button>
 
           <Input

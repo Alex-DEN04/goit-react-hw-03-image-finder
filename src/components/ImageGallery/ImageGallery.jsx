@@ -6,11 +6,10 @@ import { Gallery } from './ImageGallery.styled';
 class ImageGallery extends React.Component {
   render() {
     const { images } = this.props;
-    // console.log(images);
     return (
       <>
         <Gallery>
-          <ImageGalleryItem items={images} />
+          <ImageGalleryItem items={images} onClick={this.props.onClick} />
         </Gallery>
       </>
     );
