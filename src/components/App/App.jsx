@@ -70,7 +70,7 @@ export class App extends React.Component {
           )}
           {images.length !== 0 && <Button onClick={this.loadMore} />}
           {showModal && (
-            <Modal onClose={this.closeModal} modalImage={largeImage}></Modal>
+            <Modal onClose={this.closeModal} modalImage={largeImage} />
           )}
           <ToastContainer autoClose={3000} />
         </AppStyled>

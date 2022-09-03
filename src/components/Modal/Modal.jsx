@@ -31,7 +31,7 @@ export class Modal extends React.Component {
     return createPortal(
       <Overlay onClick={this.onBackdropClick}>
         <ModalStyled>
-          <img src={modalImage} alt="" />
+          <img src={modalImage} alt="Large foto" />
         </ModalStyled>
       </Overlay>,
       modalRoot
