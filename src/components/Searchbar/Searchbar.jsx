@@ -3,6 +3,7 @@ import { Formik } from 'formik';
 import { BsSearch } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import PropTypes from 'prop-types';
 
 import { SearchForm, Header, Button, Input } from './Searchbar.styled';
 
@@ -29,8 +30,6 @@ const Searchbar = ({ onSubmit }) => {
           <Input
             type="text"
             name="input"
-            // autocomplete="off"
-            // autofocus
             placeholder="Search images and photos"
           />
         </SearchForm>
@@ -40,3 +39,7 @@ const Searchbar = ({ onSubmit }) => {
 };
 
 export default Searchbar;
+
+Searchbar.propTypes = {
+  onSubmit: PropTypes.func,
+};

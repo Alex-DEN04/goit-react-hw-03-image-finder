@@ -1,19 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import ImageGalleryItem from '../ImageGalleryItem/ImageGalleryItem';
 import { Gallery } from './ImageGallery.styled';
 
-class ImageGallery extends React.Component {
-  render() {
-    const { images } = this.props;
-    return (
-      <>
-        <Gallery>
-          <ImageGalleryItem items={images} onClick={this.props.onClick} />
-        </Gallery>
-      </>
-    );
-  }
+export default function ImageGallery({ onClick, images }) {
+  return (
+    <>
+      <Gallery>
+        <ImageGalleryItem items={images} onClick={onClick} />
+      </Gallery>
+    </>
+  );
 }
 
-export default ImageGallery;
+ImageGallery.propTypes = {
+  images: PropTypes.arrayOf(PropTypes.object),
+  onClick: PropTypes.func,
+};

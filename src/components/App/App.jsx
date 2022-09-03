@@ -17,8 +17,8 @@ export class App extends React.Component {
     images: [],
     loading: false,
     showModal: false,
+    largeImage: '',
   };
-
   componentDidUpdate = async (prevProps, prevState) => {
     const prevImageName = prevState.imageName;
     const nextImageName = this.state.imageName.trim();
@@ -31,11 +31,6 @@ export class App extends React.Component {
           images: [...this.state.images, ...data],
           loading: false,
         });
-        // console.log(this.props);
-        // Notiflix.Notify.failure(
-        //   'Sorry, there are no images matching your search query. Please try again.',
-        // )
-        // }
       } catch (error) {
         console.log(error);
       }
@@ -50,29 +45,33 @@ export class App extends React.Component {
     this.setState(prevState => ({ page: prevState.page + 1 }));
   };
 
-  toggleModal = () => {
-    this.setState(prevState => ({ showModal: !prevState.showModal }));
+  openModal = ({ largeImageURL }) => {
+    this.setState(({ showModal }) => ({ showModal: true }));
+    this.setState(({ largeImage }) => ({ largeImage: largeImageURL }));
   };
 
-  onImageClick = () => {
-    console.log("object");
-  }
+  closeModal = () => {
+    this.setState(({ showModal }) => ({ showModal: false }));
+    this.setState(({ largeImage }) => ({ largeImage: '' }));
+  };
 
   render() {
-    const { images, loading, showModal } = this.state;
+    const { images, loading, showModal, largeImage } = this.state;
     return (
       <>
         <GlobalStyle />
         <AppStyled>
           <Searchbar onSubmit={this.handleSubmit} />
-          <ImageGallery images={images} onClick={() => this.onImageClick} />
+          <ImageGallery images={images} onClick={this.openModal} />
           {loading && (
             <Spiner>
               <RotatingLines />
             </Spiner>
           )}
           {images.length !== 0 && <Button onClick={this.loadMore} />}
-          {showModal && <Modal images={images}>{this.props.children}</Modal>}
+          {showModal && (
+            <Modal onClose={this.closeModal} modalImage={largeImage}></Modal>
+          )}
           <ToastContainer autoClose={3000} />
         </AppStyled>
       </>
